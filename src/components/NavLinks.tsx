@@ -1,5 +1,4 @@
 import { cn } from "../lib/utils";
-import { NavLink } from "react-router";
 
 
 interface MainNavProps {
@@ -15,19 +14,19 @@ const NavLinks: React.FC<MainNavProps> = ({ label }) => {
 
 
   return (
-    <nav className=" flex items-center justify-center lg:gap-x-8  md:gap-x-5">
+    <nav className=" flex flex-row items-center justify-center  md:gap-x-12 gap-x-8">
       {routes.map((route) => (
-        <NavLink 
+        <a 
           key={route.label}
-          to={`#${route.label}`}
+          href={`#${route.label}`}
           className={cn(
-            "text-base font-medium  transition-colors hover:text-neutral-400 cursor-pointer"
+            "text-sm font-light  transition-colors hover:text-neutral-400 cursor-pointer opacity-85"
           )}
         > 
           {route.label}
-        </NavLink>
+        </a>
       ))} 
-    </nav>  
+    </nav>    
   );
 };
 
