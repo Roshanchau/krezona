@@ -5,6 +5,13 @@ import Portfolio from "./components/Portfolio";
 import Features from "./components/Features";
 import CreationProcess from "./components/CreationProcess";
 import Numbers from "./components/Numbers";
+import Services from "./components/Services";
+import GameEvents from "./components/GameEvents";
+import Reviews from "./components/Reviews";
+import Awards from "./components/Awards";
+import Blog from "./components/Blog";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -18,16 +25,35 @@ function App() {
         <section id="Portfolio">
           <Portfolio />
         </section>
-        <section id="Portfolio">
+        <section id="Features">
           <Features />
         </section>
-        <section id="Portfolio">
+        <section id="CreationProcess">
           <CreationProcess />
         </section>
-        <section id="Portfolio">
+        <section id="Numbers">
           <Numbers />
         </section>
+        <section id="Services">
+          <Services />
+        </section>
+        <section id="GameEvents">
+          <GameEvents />
+        </section>
+        <section id="Reviews">
+          <Reviews />
+        </section>
+        <section id="Awards">
+          <Awards />
+        </section>
+        <section id="Blog">
+          <Blog />
+        </section>
+        <section id="Contact">
+          <Contact />
+        </section>
       </div>
+      <Footer/>
     </>
   );
 }

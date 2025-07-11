@@ -8,7 +8,7 @@ const FeaturesCard:React.FC<FeaturesCardProps> = ({title, description , imagePat
   return (
     <div className="relative mt-16">
       <div
-        className="rounded-lg absolute right-[75px] bottom-40"
+        className="rounded-lg absolute md:right-[75px] right-[90px] bottom-40"
         style={{
           width: "100px",
           height: "100px",
@@ -52,12 +52,12 @@ const FeaturesCard:React.FC<FeaturesCardProps> = ({title, description , imagePat
       </div>
       <div
         className="flex flex-col p-8 rounded-lg text-center"
-        style={{
-          background: "linear-gradient(265deg , #221C4A 0%, #0A081F 100%)",
+                style={{
+          background: "linear-gradient(265deg ,#4D4F95 0%, #2B2D66 100%)",
         }}
       >
-        <h1 className="font-thin text-2xl text-white mt-10 ">{title}</h1>
-        <h3 className="font-light text-sm mt-2 text-neutral-500">
+        <h1 className="font-extralight text-2xl text-white mt-10 ">{title}</h1>
+        <h3 className="font-light text-sm mt-2 text-neutral-400">
           {description}
         </h3>
       </div>

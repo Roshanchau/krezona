@@ -20,4 +20,9 @@ export default tseslint.config([
       globals: globals.browser,
     },
   },
+  {
+    rules: {
+      'react/no-unescaped-entities': 'off', // or 'warn' if you want just a warning
+    },
+  },
 ])

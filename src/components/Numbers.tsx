@@ -1,3 +1,6 @@
+import NumbersCard from "./ui/NumbersCard";
+import SecondaryNumberCard from "./ui/SecondaryNumberCard";
+
 const Numbers = () => {
   return (
     <div className=" px-4 sm:px-6 md:px-16  mx-auto max-w-7xl mt-36">
@@ -12,31 +15,20 @@ const Numbers = () => {
           playable game for users developers, also known as games developers.
         </h3>
       </div>
-      {/* images */}
-      <div className="relative flex items-center justify-center">
-        <div className="flex items-center justify-center md:w-auto w-full mt-16 z-10">
-          <img
-            src="/images/creation.png"
-            alt="creation"
-            className="rounded-b-lg"
-          />
+      {/* cards */}
+      <div className="flex md:flex-row flex-col items-center justify-center gap-6 mt-12">
+        <div>
+          <NumbersCard Numbers="7.300+" description="The sky was cloudless" />
         </div>
-        <div className="absolute md:right-36 -right-16 top-5">
-          <img src="/images/pattern.png" alt="pattern" />
+        <div>
+          <NumbersCard Numbers="420<" description="Deep dark blue" />
         </div>
-        <div className="bg-white absolute md:left-36 top-40 z-20 md:w-1/5 w-4/5 p-3 flex flex-col gap-6 rounded-lg md:p-6">
-          <h3 className="font-light text-neutral-500">01</h3>
-          <h1 className="font-extralight flex-wrap text-3xl text-neutral-700 leading-[40px] ">
-            Market Research
-          </h1>
-          <h3 className="font-light  text-sm leading-7 text-neutral-500 text-start">
-            Game Development is the art of creating games and describes the
-            design.
-          </h3>
+        <div>
+          <SecondaryNumberCard Numbers="95%" description="Creating games" />
         </div>
-      </div>
-      <div className="flex items-center justify-center mt-10">
-        <img src="/images/pins.png" alt="pins" />
+        <div>
+          <NumbersCard Numbers="0.002" description="Describes the design" />
+        </div>
       </div>
     </div>
   );
