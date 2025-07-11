@@ -22,7 +22,7 @@ function App() {
         <section id="About">
           <About />
         </section>
-        <section id="Portfolio">
+        <section id="Games">
           <Portfolio />
         </section>
         <section id="Features">
@@ -37,7 +37,7 @@ function App() {
         <section id="Services">
           <Services />
         </section>
-        <section id="GameEvents">
+        <section id="Events">
           <GameEvents />
         </section>
         <section id="Reviews">
