@@ -1,5 +1,9 @@
 
 const Hero = () => {
+    const handleClick = () => {
+    window.location.hash = "#Portfolio";
+  }
+
   return (
     <>
       <div className="px-4 sm:px-6 md:px-16 mt-8 mx-auto max-w-7xl">
@@ -17,7 +21,7 @@ const Hero = () => {
               design, development and release.
             </h2>
             <div className="flex flex-row items-center justify-center">
-              <button className="bg-blue-800 py-3 px-6 rounded-lg mb-10">
+              <button onClick={handleClick} className="bg-blue-800 py-3 px-6 rounded-lg mb-10">
                 PORTFOLIO
               </button>
               <div className="flex flex-row items-center justify-center">

@@ -22,13 +22,13 @@ function App() {
         <section id="About">
           <About />
         </section>
-        <section id="Games">
+        <section id="Portfolio">
           <Portfolio />
         </section>
         <section id="Features">
           <Features />
         </section>
-        <section id="CreationProcess">
+        <section id="Games">
           <CreationProcess />
         </section>
         <section id="Numbers">

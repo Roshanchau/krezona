@@ -1,7 +1,45 @@
 import EventsCard from "./ui/EventsCard";
 import { Button } from "@/base/ui/button";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+interface Event {
+  name: string;
+  eventDate: Date;
+  image: {
+    url: string;
+  };
+}
 
 const GameEvents = () => {
+  const [events, setEvents] = useState<Event[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const response = await axios.get(
+          "https://krezona-backend.vercel.app/api/event"
+        ); // Adjust the endpoint as needed
+        console.log("Fetched events:", response);
+        if (!response?.data?.data?.events) {
+          console.error("No games found in response");
+          return;
+        }
+        // Assuming the response structure is { games: Game[] }
+        setEvents(response?.data?.data?.events);
+      } catch (error) {
+        console.error("Error fetching games:", error);
+      }
+    };
+
+    fetchEvents();
+  }, []);
+
+  const handleEvents = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <div className=" px-4 sm:px-6 md:px-16  mx-auto max-w-7xl mt-36">
       {/* intro */}
@@ -16,25 +54,57 @@ const GameEvents = () => {
         </h3>
       </div>
       {/* cards */}
-      <div className="flex md:flex-row flex-col items-center justify-center gap-6 mt-12">
-        <EventsCard
-          imagePath="/images/creation.png"
-          date="30 Nov, 2020"
-          title="Best Game Award"
-        />
-        <EventsCard
-          imagePath="/images/space.png"
-          date="12 Dec, 2020"
-          title="Great Video Game Event"
-        />
-        <EventsCard
-          imagePath="/images/ship.png"
-          date="24 Dec, 2020"
-          title="E5 Game Show"
-        />
+      <div className="grid md:grid-cols-3 grid-cols-1 items-center justify-center gap-6 mt-12">
+        {events.map((event, index) => {
+          const date = new Date(event.eventDate);
+          const formattedDate = date.toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          });
+          if (index <= 2) {
+            return (
+              <EventsCard
+                key={index}
+                title={event.name}
+                date={formattedDate}
+                imagePath={event.image?.url}
+              />
+            );
+          } else {
+            return null;
+          }
+        })}
       </div>
+      {isOpen && (
+        <div className="grid md:grid-cols-3 grid-cols-1 items-center justify-center gap-6 mt-12">
+          {events.map((event, index) => { 
+            const date = new Date(event.eventDate);
+            const formattedDate = date.toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            });
+            if(index>2){
+              return (
+                <EventsCard
+                  key={index}
+                  title={event.name}
+                  date={formattedDate}
+                  imagePath={event.image?.url}
+                />
+              );
+            }
+          })}
+        </div>
+      )}
       <div className="flex items-center justify-center mt-16">
-        <Button className="border-2 border-neutral-700  px-8">ALL EVENTS</Button>
+        <Button
+          onClick={handleEvents}
+          className="border-2 border-neutral-700  px-8"
+        >
+          {isOpen ? "HIDE EVENTS" : "ALL EVENTS"}
+        </Button>
       </div>
     </div>
   );

@@ -1,7 +1,47 @@
 import { Button } from "@/base/ui/button";
 import BlogCard from "./ui/BlogCard";
+import { useEffect } from "react";
+import { useState } from "react";
+import axios from "axios";
+
+interface Blog {
+  title: string;
+  content: string;
+  createdAt: string;
+  image: {
+    url: string;
+  };
+}
 
 const Blog = () => {
+    const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const response = await axios.get(
+          "https://krezona-backend.vercel.app/api/blog"
+        ); // Adjust the endpoint as needed
+        console.log("Fetched blogs:", response);
+        if (!response?.data?.data?.blogs) {
+          console.error("No games found in response");
+          return;
+        }
+        // Assuming the response structure is { games: Game[] }
+        setBlogs(response?.data?.data?.blogs);
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
+      }
+    };
+
+    fetchBlogs();
+  }, []);
+
+  const handleBlogs = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <div className=" px-4 sm:px-6 md:px-16  mx-auto max-w-7xl mt-36">
       {/* intro */}
@@ -16,29 +56,59 @@ const Blog = () => {
         </h3>
       </div>
       {/* cards */}
-      <div className="flex md:flex-row flex-col items-center justify-center gap-6 mt-12">
-        <BlogCard
-          imagePath="/images/creation.png"
-          date="30 Nov, 2020"
-          title="The Complete Guide Average Video Game Designer Salary"
-        />
-        <BlogCard
-          imagePath="/images/space.png"
-          date="12 Dec, 2020"
-          title="The 5 Decisive Components of Outstanding Learning Games"
-        />
-        <BlogCard
-          imagePath="/images/ship.png"
-          date="24 Dec, 2020"
-          title="Become a Gaming Programmer: Step-by-Step Career Guide"
-        />
+ <div className="grid md:grid-cols-3 grid-cols-1 items-center justify-center gap-6 mt-12">
+        {blogs.map((blog, index) => {
+          const date = new Date(blog.createdAt);
+          const formattedDate = date.toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          });
+          if (index <= 2) {
+            return (
+              <BlogCard
+                key={index}
+                title={blog.title}
+                date={formattedDate}
+                imagePath={blog.image?.url}
+              />
+            );
+          } else {
+            return null;
+          }
+        })}
       </div>
+      {isOpen && (
+        <div className="grid md:grid-cols-3 grid-cols-1 items-center justify-center gap-6 mt-12">
+          {blogs.map((blog, index) => { 
+            const date = new Date(blog.createdAt);
+            const formattedDate = date.toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            });
+            if(index>2){
+              return (
+                <BlogCard
+                  key={index}
+                  title={blog.title}
+                  date={formattedDate}
+                  imagePath={blog.image?.url}
+                />
+              );
+            }
+          })}
+        </div>
+      )}
       <div className="flex items-center justify-center mt-16">
-        <Button className="border-2 border-neutral-700  px-8">
-          SEE MORE
+        <Button
+          onClick={handleBlogs}
+          className="border-2 border-neutral-700  px-8"
+        >
+          {isOpen ? "HIDE" : "SEE MORE"}
         </Button>
       </div>
-    </div>
+    </div>  
   );
 };
 
