@@ -9,7 +9,7 @@ interface Game {
   description: string;
   image: {
     url: string;
-  };
+  }[];
 }
 
 const Portfolio = () => {
@@ -67,7 +67,7 @@ const Portfolio = () => {
                   key={index}
                   title={game.title}
                   description={game.description}
-                  imagePath={game.image.url}
+                  imagePath={game?.image[0].url}
                 />
               );
             }
@@ -86,7 +86,7 @@ const Portfolio = () => {
                   key={index}
                   title={game.title}
                   description={game.description}
-                  imagePath={game.image.url}
+                  imagePath={game.image[0].url}
                 />
               );
             }

@@ -8,7 +8,7 @@ interface Event {
   eventDate: Date;
   image: {
     url: string;
-  };
+  }[];
 }
 
 const GameEvents = () => {
@@ -68,7 +68,7 @@ const GameEvents = () => {
                 key={index}
                 title={event.name}
                 date={formattedDate}
-                imagePath={event.image?.url}
+                imagePath={event.image[0].url}
               />
             );
           } else {
@@ -91,7 +91,7 @@ const GameEvents = () => {
                   key={index}
                   title={event.name}
                   date={formattedDate}
-                  imagePath={event.image?.url}
+                  imagePath={event.image[0].url}
                 />
               );
             }

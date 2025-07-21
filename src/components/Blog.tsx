@@ -10,7 +10,7 @@ interface Blog {
   createdAt: string;
   image: {
     url: string;
-  };
+  }[];
 }
 
 const Blog = () => {
@@ -70,7 +70,7 @@ const Blog = () => {
                 key={index}
                 title={blog.title}
                 date={formattedDate}
-                imagePath={blog.image?.url}
+                imagePath={blog.image[0].url}
               />
             );
           } else {
@@ -93,7 +93,7 @@ const Blog = () => {
                   key={index}
                   title={blog.title}
                   date={formattedDate}
-                  imagePath={blog.image?.url}
+                  imagePath={blog.image[0].url}
                 />
               );
             }
